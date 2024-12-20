@@ -9,7 +9,7 @@ import uvicorn
 app = fastapi.FastAPI()
 sys.stdout.reconfigure(encoding='utf-8')
 class Lyrics:
-    async def search_lyrics(query):
+    async def search(query):
         try:
             search_url = f"https://genius.com/api/search/song?q={quote_plus(query)}"
             headers = {
@@ -76,7 +76,7 @@ class Lyrics:
             return ""    
     @classmethod
     async def lyrics(cls, query: str):
-        url = await cls.search_lyrics(query)
+        url = await cls.search(query)
         lyrics = await cls.get_lyrics(url)
         artists = await cls.get_artists(url)
         title = await cls.get_title(url)
