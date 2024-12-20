@@ -1,10 +1,11 @@
 import lyrical
 import asyncio
 import json
-lyrics = asyncio.run(lyrical.Lyrics.get_lyrics("Hello World"))
-artist = asyncio.run(lyrical.Lyrics.get_artists("https://genius.com/Louie-zong-hello-world-lyrics"))
-title = asyncio.run(lyrical.Lyrics.get_title("https://genius.com/Louie-zong-hello-world-lyrics"))
+url = asyncio.run(lyrical.Lyrics.search_lyrics("Hello World"))
+lyrics = asyncio.run(lyrical.Lyrics.get_lyrics(url))
+artist = asyncio.run(lyrical.Lyrics.get_artists(url))
+title = asyncio.run(lyrical.Lyrics.get_title(url))
 print(f'Lyrics: {lyrics}\nArtists: {artist}\nTitle: {title}')
 
-overall = lyrical.Lyrics.lyrics("Hello World")
+overall = asyncio.run(lyrical.Lyrics.lyrics("Hello World"))
 print(json.loads(overall))
