@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lyrical"
+version = "1.0.0"
+description = "Python package to fetch song lyrics from Genius"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+keywords = ["lyrics", "genius", "music", "songs"]
+authors = [{ name = "SnarkyDev", email = "snarkydev@outlook.com" }]
+maintainers = [{ name = "SnarkyDev", email = "snarkydev@outlook.com" }]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Multimedia :: Sound/Audio",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "httpx",
+    "beautifulsoup4",
+    "fastapi",
+    "uvicorn"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/SnarkyDeveloper/Lyrical"
+"Bug Reports" = "https://github.com/SnarkyDeveloper/Lyrical/issues"
+"Source" = "https://github.com/SnarkyDeveloper/Lyrical"
+
+[tool.setuptools.packages.find]
+include = ["lyrical*"]
+
