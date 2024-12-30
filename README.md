@@ -11,7 +11,7 @@ pip install lyrical
 ## Info
 
 - **Author:** SnarkyDev
-- **Version:** 1.1.1
+- **Version:** 1.1.2
 - **LICENSE:** MIT
 - **USE:** Scrapes Genius for lyrics, in an async way
 
