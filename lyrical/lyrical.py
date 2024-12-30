@@ -77,6 +77,8 @@ class Lyrics:
     @classmethod
     async def lyrics(cls, query: str):
         url = await cls.search(query)
+        if not url:
+            return None
         lyrics = await cls.get_lyrics(url)
         artists = await cls.get_artists(url)
         title = await cls.get_title(url)
