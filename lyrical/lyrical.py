@@ -9,7 +9,7 @@ import uvicorn
 app = fastapi.FastAPI()
 sys.stdout.reconfigure(encoding='utf-8')
 class Lyrics:
-    async def search(query):
+    async def search(self, query):
         try:
             search_url = f"https://genius.com/api/search/song?q={quote_plus(query)}"
             headers = {
@@ -26,26 +26,26 @@ class Lyrics:
         except Exception as e:
             print(f"An error occurred: {e}")
             return None
-    async def get_lyrics(url):
+    async def get_lyrics(self, url):
         try:
             response = httpx.get(url)
             soup = BeautifulSoup(response.text, 'html.parser')
             lyrics_containers = soup.find_all('div', attrs={'data-lyrics-container': 'true'})
-        
             if lyrics_containers:
                 full_lyrics = []
                 for container in lyrics_containers:
                     for br in container.find_all('br'):
                         br.replace_with('\n')
                     full_lyrics.append(container.get_text())
-                return '\n'.join(full_lyrics)
+                lyr = '\n'.join(full_lyrics)
+                return lyr.split('Lyrics')[1]
             else:
                 print("No lyrics container found.")
                 return None
         except Exception as e:
             print(f"An error occurred: {e}")
             return None    
-    async def get_artists(url):
+    async def get_artists(self, url):
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
         }
@@ -60,7 +60,7 @@ class Lyrics:
                 return artists
             
         return ""
-    async def get_title(url):
+    async def get_title(self, url):
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
         }
@@ -74,14 +74,14 @@ class Lyrics:
                 return title_meta['content']
                 
             return ""    
-    @classmethod
-    async def lyrics(cls, query: str):
-        url = await cls.search(query)
+
+    async def lyrics(self, query: str):
+        url = await self.search(query)
         if not url:
             return None
-        lyrics = await cls.get_lyrics(url)
-        artists = await cls.get_artists(url)
-        title = await cls.get_title(url)
+        lyrics = await self.get_lyrics(url)
+        artists = await self.get_artists(url)
+        title = await self.get_title(url)
         data = {
             'title': title,
             'artists': artists,
